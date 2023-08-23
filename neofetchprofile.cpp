@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <limits>
+#include <unistd.h>
 using namespace std;
 
 
@@ -146,6 +147,60 @@ int mew_start()
 }
 
 
+int sonic_start()
+{
+    string line;
+    vector<string> lines;
+    const int line_number = 2;
+    string sonic = "neofetch --kitty Downloads/imageedit_0_3056955705.png";
+    fstream read_myfile;
+    read_myfile.open ("/home/melone/Dokumente/.bashtest");
+    if(read_myfile.fail()){
+        cout << "failes to open fail";
+    }
+
+        
+        while(getline(read_myfile, line))
+            lines.push_back(line);
+            cout << lines.size();
+
+            read_myfile.close();
+
+     if (line_number > lines.size())
+  {
+    cout << "Line " << line_number;
+    cout << " not in file." << endl;
+    
+    cout << "File has " << lines.size();
+    cout << " lines." << endl;
+
+    return 1;
+  }
+
+            ofstream write_myfile;
+            write_myfile.open ("/home/melone/Dokumente/.bashtest");
+            if(write_myfile.is_open())
+            {
+
+            for (int i = 0; i < lines.size(); i++)
+            {
+                if (i != line_number)
+                    write_myfile << lines[i] << endl;
+
+                else
+                    write_myfile << sonic << endl;
+
+            }
+            }
+ write_myfile.close();
+                    return 0;
+
+}
+
+
+
+
+
 int Open_and_Bufefer()
 {
     string line;
@@ -197,7 +252,35 @@ int Open_and_Bufefer()
     }
 }
 
-int main (int argc, char* argv) {
-    clean_line();
-    mew_start();
+int main (int argc, char *argv[]) {
+   int cl_input;
+  opterr = 0;
+  // Checking the file flag is specified
+  while ((cl_input = getopt(argc, argv, ":fms")) != -1)
+    switch (cl_input)
+      {
+      case 'f':
+        clean_line();
+        break;
+      case 'sonic':
+        sonic_start();
+        break;
+      case 'mew':
+        {
+            mew_start();
+            break;
+        }
+      case '?':
+        if (optopt == 'f' || optopt == 'm' || optopt == 's')
+          fprintf (stderr, "Options -%f and -%i require an argument.\n", optopt);
+        else if (isprint (optopt))
+          fprintf (stderr, "Unknown option `-%f'.\n", optopt);
+        else
+          fprintf (stderr,
+                   "Unknown option character `\\x%x'.\n",
+                   optopt);
+        return 1;
+      default:
+        abort ();
+}
 }
