@@ -4,16 +4,18 @@
 #include <vector>
 #include <limits>
 #include <unistd.h>
+#include <cstring>
 using namespace std;
 
-
-string bashrc_path = "~/.bashrc";
+// Paste your bashrc Path here (usual in your home)
+string bashrc_path = "/home/melone/.bashrc";
+// *******************^^^^^^^^^^^^^^^^^^^^^^
 
 
 
 void clean_line()
 {
-    std::fstream file("/home/melone/.bashrc", std::ios::in);
+    std::fstream file(bashrc_path.c_str(), std::ios::in);
 
 if(file.is_open()) {
     std::string replace = "neofetch";
@@ -34,7 +36,7 @@ if(file.is_open()) {
     }
 
     file.close();
-    file.open("/home/melone/.bashrc", std::ios::out | std::ios::trunc);
+    file.open(bashrc_path.c_str(), std::ios::out | std::ios::trunc);
     
     for(const auto& i : lines) {
         file << i << std::endl;
@@ -50,17 +52,16 @@ int mew_start()
     string line;
     vector<string> lines;
     const int line_number = 2;
-    string mew = "neofetch --colors 5 5 7 5 5 7  --kitty /projekte/neofecht-script/nf-profile-pictures/Mew.png";
+    string mew = "neofetch --colors 5 5 7 5 5 7  --kitty nf-profile/nf-profile-pictures/Mew.png";
     fstream read_myfile;
-    read_myfile.open ("/home/melone/.bashrc");
+    read_myfile.open (bashrc_path.c_str());
     if(read_myfile.fail()){
-        cout << "failes to open fail";
+        cout << "failes to open fail" << endl;
     }
 
         
         while(getline(read_myfile, line))
             lines.push_back(line);
-            cout << lines.size();
 
             read_myfile.close();
 
@@ -76,7 +77,7 @@ int mew_start()
   }
 
             ofstream write_myfile;
-            write_myfile.open ("/home/melone/.bashrc");
+            write_myfile.open (bashrc_path.c_str());
             if(write_myfile.is_open())
             {
 
@@ -101,9 +102,9 @@ int sonic_start()
     string line;
     vector<string> lines;
     const int line_number = 2;
-    string sonic = "neofetch --colors 8 1 8 7 7 1 --kitty /projekte/neofecht-script/nf-profile-pictures/sonic.png";
+    string sonic = "neofetch --colors 8 1 8 7 7 1 --kitty nf-profile/nf-profile-pictures/sonic.png";
     fstream read_myfile;
-    read_myfile.open ("/home/melone/.bashrc");
+    read_myfile.open (bashrc_path.c_str());
     if(read_myfile.fail()){
         cout << "failes to open fail";
     }
@@ -127,7 +128,7 @@ int sonic_start()
   }
 
             ofstream write_myfile;
-            write_myfile.open ("/home/melone/.bashrc");
+            write_myfile.open (bashrc_path.c_str());
             if(write_myfile.is_open())
             {
 
