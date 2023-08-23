@@ -7,6 +7,9 @@
 using namespace std;
 
 
+string bashrc_path = "~/.bashrc";
+
+
 
 void clean_line()
 {
@@ -147,7 +150,9 @@ void help()
 {
     cout << "**********This is help of nf-script**********";
     cout << endl;
-    cout << "On the First start use -c to Clear the .bashrc config" << endl;
+    cout << "On the First start use -c to Clear the .bashrc config (just the word neofetch)" << endl;
+    cout << endl;
+    cout << "use -r to reload your Terminal" << endl;
     cout << endl;
     cout << "use -m for mew-profile" << endl;
     cout << "use -s for sonic-profile" << endl;
