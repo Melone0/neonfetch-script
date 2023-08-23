@@ -8,8 +8,8 @@
 using namespace std;
 
 // Paste your bashrc Path here (usual in your home)
-string bashrc_path = "/home/melone/.bashrc";
-// *******************^^^^^^^^^^^^^^^^^^^^^^
+string bashrc_path = " ";
+// *******************^********
 
 
 
