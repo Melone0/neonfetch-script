@@ -47,7 +47,7 @@ int mew_start()
     string line;
     vector<string> lines;
     const int line_number = 2;
-    string mew = "neofetch --kitty /projekte/neofecht-script/nf-profile-pictures/Mew.png";
+    string mew = "neofetch --colors 5 5 7 5 5 7  --kitty /projekte/neofecht-script/nf-profile-pictures/Mew.png";
     fstream read_myfile;
     read_myfile.open ("/home/melone/.bashrc");
     if(read_myfile.fail()){
@@ -98,7 +98,7 @@ int sonic_start()
     string line;
     vector<string> lines;
     const int line_number = 2;
-    string sonic = "neofetch --kitty /projekte/neofecht-script/nf-profile-pictures/sonic.png";
+    string sonic = "neofetch --colors 8 1 8 7 7 1 --kitty /projekte/neofecht-script/nf-profile-pictures/sonic.png";
     fstream read_myfile;
     read_myfile.open ("/home/melone/.bashrc");
     if(read_myfile.fail()){
@@ -156,8 +156,7 @@ void help()
 int main (int argc, char *argv[]) {
    int cl_input;
   opterr = 0;
-  // Checking the file flag is specified
-  while ((cl_input = getopt(argc, argv, ":cmsh")) != -1)
+  while ((cl_input = getopt(argc, argv, ":cmshr")) != -1)
     switch (cl_input)
       {
       case 'c':
@@ -166,12 +165,19 @@ int main (int argc, char *argv[]) {
       case 's':
         sonic_start();
         break;
+
       case 'm':
-            mew_start();
-            break;
-        case 'h':
-            help();
-            break;
+        mew_start();
+        break;
+
+        case 'r':
+        system("bash");
+        break;
+
+      case 'h':
+        help();
+        break;
+
       case '?':
         cout << "No valid argument , use -h";
         return 1;
