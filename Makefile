@@ -10,5 +10,6 @@ nf-profile: neofetchprofile.cpp
 install: nf-profile
 	mkdir -p $(PREFIX)/bin
 	install nf-profile $(PREFIX)/bin/nf-profile
+	@rm -rf ./nf-profile
 
 .PHONY: all install
