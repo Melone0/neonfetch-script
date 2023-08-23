@@ -10,7 +10,7 @@ using namespace std;
 
 void clean_line()
 {
-    std::fstream file("/home/melone/Dokumente/.bashtest", std::ios::in);
+    std::fstream file("/home/melone/.bashrc", std::ios::in);
 
 if(file.is_open()) {
     std::string replace = "neofetch";
@@ -31,7 +31,7 @@ if(file.is_open()) {
     }
 
     file.close();
-    file.open("/home/melone/Dokumente/.bashtest", std::ios::out | std::ios::trunc);
+    file.open("/home/melone/.bashrc", std::ios::out | std::ios::trunc);
     
     for(const auto& i : lines) {
         file << i << std::endl;
@@ -42,68 +42,14 @@ else{
 }
 }
 
-int test()
-{
-  string text = "neofetch --kitty /projekte/neofecht-script/Mew-Pokemon-PNG-Photo-Image.png";
-  int line_number = 2;  
-  fstream read_file;
-  read_file.open("/home/melone/Dokumente/.bashtest");
-  
-  if (read_file.fail())
-  {
-   std::cout << "Error opening file." << endl;
-
-    return 1;
-  }
-  
-  vector<string> lines;
-  string line;
-  
-  while (getline(read_file, line))
-    lines.push_back(line);
-  
-  read_file.close();
-  
-  if (line_number > lines.size())
-  {
-    cout << "Line " << line_number;
-    cout << " not in file." << endl;
-    
-    cout << "File has " << lines.size();
-    cout << " lines." << endl;
-
-    return 1;
-  }
-  
-  ofstream write_file;
-  
-  write_file.open("/home/melone/Dokumente/.bashtest");
-  
-  if (write_file.fail())
-  {
-    cout << "Error opening file." << endl;
-    return 1;
-  }
-  for (int i = 0; i < lines.size(); i++)
-  {
-    if (i != line_number)
-      write_file << lines[i] << endl;
-    else 
-      write_file << text << endl; 
-  }
-  write_file.close();
-
-  return 0;
-}
-
 int mew_start()
 {
     string line;
     vector<string> lines;
     const int line_number = 2;
-    string mew = "neofetch --kitty /projekte/neofecht-script/Mew-Pokemon-PNG-Photo-Image.png";
+    string mew = "neofetch --kitty /projekte/neofecht-script/nf-profile-pictures/Mew.png";
     fstream read_myfile;
-    read_myfile.open ("/home/melone/Dokumente/.bashtest");
+    read_myfile.open ("/home/melone/.bashrc");
     if(read_myfile.fail()){
         cout << "failes to open fail";
     }
@@ -127,7 +73,7 @@ int mew_start()
   }
 
             ofstream write_myfile;
-            write_myfile.open ("/home/melone/Dokumente/.bashtest");
+            write_myfile.open ("/home/melone/.bashrc");
             if(write_myfile.is_open())
             {
 
@@ -152,9 +98,9 @@ int sonic_start()
     string line;
     vector<string> lines;
     const int line_number = 2;
-    string sonic = "neofetch --kitty Downloads/imageedit_0_3056955705.png";
+    string sonic = "neofetch --kitty /projekte/neofecht-script/nf-profile-pictures/sonic.png";
     fstream read_myfile;
-    read_myfile.open ("/home/melone/Dokumente/.bashtest");
+    read_myfile.open ("/home/melone/.bashrc");
     if(read_myfile.fail()){
         cout << "failes to open fail";
     }
@@ -178,7 +124,7 @@ int sonic_start()
   }
 
             ofstream write_myfile;
-            write_myfile.open ("/home/melone/Dokumente/.bashtest");
+            write_myfile.open ("/home/melone/.bashrc");
             if(write_myfile.is_open())
             {
 
@@ -197,88 +143,37 @@ int sonic_start()
 
 }
 
-
-
-
-
-int Open_and_Bufefer()
+void help()
 {
-    string line;
-    vector<string> lines;
-    const int line_number = 2;
-    string mew = "neofetch --kitty /projekte/neofecht-script/Mew-Pokemon-PNG-Photo-Image.png";
-    fstream read_myfile;
-    read_myfile.open ("/home/melone/Dokumente/.bashtest");
-    
-    if (!read_myfile.is_open())
-    {
-        cout << "file failed";
-        return 1;
-    }
-    else {
-    
-    stringstream buffer;
-
-    buffer << read_myfile.rdbuf();
-
-    string file_content;
-
-    file_content = buffer.str();
-
-    read_myfile.close();
-
-    cout << file_content[2];
-
-    ofstream write_myfile;
-    write_myfile.open("/home/melone/Dokumente/.bashtest");
-
-    if (write_myfile.is_open())
-    {
-        for (int i = 0;i < file_content.size(); i++)
-        {
-            if (i != line_number)
-            {
-                write_myfile << file_content[i];
-            }
-            else
-            {
-                write_myfile << mew << endl;
-            }
-        }
-        write_myfile.close();
-    }
-
-    return 0;
-    }
+    cout << "**********This is help of nf-script**********";
+    cout << endl;
+    cout << "On the First start use -c to Clear the .bashrc config" << endl;
+    cout << endl;
+    cout << "use -m for mew-profile" << endl;
+    cout << "use -s for sonic-profile" << endl;
 }
 
 int main (int argc, char *argv[]) {
    int cl_input;
   opterr = 0;
   // Checking the file flag is specified
-  while ((cl_input = getopt(argc, argv, ":fms")) != -1)
+  while ((cl_input = getopt(argc, argv, ":cmsh")) != -1)
     switch (cl_input)
       {
-      case 'f':
+      case 'c':
         clean_line();
         break;
-      case 'sonic':
+      case 's':
         sonic_start();
         break;
-      case 'mew':
-        {
+      case 'm':
             mew_start();
             break;
-        }
+        case 'h':
+            help();
+            break;
       case '?':
-        if (optopt == 'f' || optopt == 'm' || optopt == 's')
-          fprintf (stderr, "Options -%f and -%i require an argument.\n", optopt);
-        else if (isprint (optopt))
-          fprintf (stderr, "Unknown option `-%f'.\n", optopt);
-        else
-          fprintf (stderr,
-                   "Unknown option character `\\x%x'.\n",
-                   optopt);
+        cout << "No valid argument , use -h";
         return 1;
       default:
         abort ();
