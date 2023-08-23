@@ -1,6 +1,6 @@
 paleofetch
 ==========
-A script to for (neofetch) (https://github.com/dylanaraps/neofetch) in c++
+A script for (neofetch) (https://github.com/dylanaraps/neofetch) in c++
 
 After Installing
 ---------
